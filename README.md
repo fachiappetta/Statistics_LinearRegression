@@ -7,7 +7,8 @@ Deforestation is a consistent and pressing issue in the world today. During the 
 Our study sought to answer the question: Is there an association between impartial governance, as measured by impartial administration under democratic principles, and deforestation? Based on the literature and the unpredictability of government performance, we hypothesized that higher levels of impartial governance would be associated with deforestation (negative forest area change). Studies on the relationship between impartial governance and deforestation are scarce, in particular from the perspective of the performance of democracy. Therefore, the main objective in this paper is to explore the impact of impartial governance on deforestation in 148 countries for the period 2014-2019.
 
 
-METHODS
+**METHODS
+
 We initially tried using panel data from 2010-2020 to examine the association between impartial administration and deforestation. First we ran fixed effects and random effects models with the same control and explanatory variables outlined above, but with Global Forest Watch tree cover change data for response variable. We decided on panel data looking at the same countries (cross-sectional) each year (longitudinal). The control variables consisted of agricultural percent, population growth, mean years of schooling, total forest percent, and change in GDP per capita. The choice of control variables was determined to be consistent with previous studies Umemiya et al. (2010) and also aligned with findings from the literature (Hosonuma et al., 2012; Jha and Bawa, 2006; Crespo Cuaresma et al., 2017).
 
 We did not find a statistically significant relationship between tree cover change and our governance indicators. However, the Global Forest Watch data measures tree cover change, not just forest cover change. Tree cover change also incorporates afforestation from agriculture to tree plantations and other tree cover, but not forest cover changes.
