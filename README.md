@@ -19,3 +19,6 @@ We also subset our data frames by “deforestation” (i.e. filtering for observ
 
 We ultimately settled on a cross-sectional approach, using % change in forest from 2014-2019 as our response variable. For our explanatory variables we used the target explanatory variable and the control variables outlined in the Description of the Variables section. We ran a multiple linear regression for all countries, all deforested countries, tropical countries, and deforested tropical countries. We chose to subset the data to deforested countries based on the findings of Umemiya et al. (2010), who found a statistically significant relationship between countries with negative forest change (positive deforestation rate) and governance indicators from 2000-2005.
 
+
+
+
