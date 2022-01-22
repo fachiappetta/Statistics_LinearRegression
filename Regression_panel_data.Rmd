@@ -1,0 +1,607 @@
+---
+title: "Final Project RMD"
+author: "Francesca Chiappetta, Malkie Wall, Chrissie Pantoja"
+date: "12/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+**Response variables**
+Change in percent forest area (% of land area) - constructed from https://data.worldbank.org/indicator 
+
+**Explanatory variables**
+Forest area (sq km) - https://data.worldbank.org/indicator 
+Agricultural land (% of land area) - https://data.worldbank.org/indicator
+Population density - https://data.worldbank.org/indicator 
+GDP per capita  - https://data.worldbank.org/indicator 
+
+Direct democracy (mean years school, impartial adminsitration attributes) - https://govdata360.worldbank.org/indicators/hc7b6c41f?country=BRA&indicator=41865&viz=line_chart&years=1975,2019
+
+### Read in Data
+```{r libraries, include=FALSE}
+library(wbstats) #package to get worldbank data
+library(rio)
+library(tidyverse)
+library(tidyr)
+library(stringr) #used to clean up strings of text.
+library(openxlsx)
+library(panelr)
+library(dplyr)
+library(knitr)
+library(reshape) # a package to melt data
+library(moments) #find skewness
+library(gt) # a package to make tables
+library(psych) #package to make panel plots 
+library(GGally) #scatterplot matrix
+library(plotly)
+library(ggplot2)
+library(skimr)
+library(plm)
+library(sandwich) # a package that includes functions for robust standard errors 
+library(car) # a companion to applied regression (car), functions to test assumptions
+library(olsrr) #Cook's Distance test
+library(broom) #allows us to get model fit statistics
+library(lmtest)
+library(clubSandwich)
+library(DescTools)
+library(ltm)
+library(huxtable) #package to create LaTeX and HTML tables
+library("reshape2") #melt function
+library(gtsummary)
+
+set.seed(42)
+# define the markup language we are working in.
+# options(qwraps2_markup = "latex") is also supported.
+options(qwraps2_markup = "markdown")
+
+#remove scientific notation
+options(scipen=999)
+
+```
+
+```{r read data, results=FALSE, echo=FALSE}
+#I think delete the lines that are hashed out because they don't work 
+forest.percent <- wb_data(indicator = "AG.LND.FRST.ZS")  #AG.LND.FRST.ZS 
+forest.area <- wb_data(indicator = "AG.LND.FRST.K2") #AG.LND.FRST.K2
+ag.percent <- wb_data(indicator = "AG.LND.AGRI.ZS") #ag.percent.code
+pop.density <- wb_data(indicator = "EN.POP.DNST") #EN.POP.DNST
+GDPpc <- wb_data(indicator = "NY.GDP.PCAP.CD") #NY.GDP.PCAP.CD
+forest.depletion <- wb_data(indicator = "NY.ADJ.DFOR.GN.ZS")#NY.ADJ.DFOR.GN.ZS
+
+direct.democracy <- read.csv("https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv")
+```
+
+```{r data extraction, results=FALSE, echo=FALSE}
+head(direct.democracy)
+#pull out data from direct democracy csv
+
+
+
+#41944 - impartial administration
+impartial.administration <-direct.democracy %>% 
+    filter(Indicator.Id==41944)
+
+#41794 - absence of corruption 
+absence.corruption<-direct.democracy %>% 
+    filter(Indicator.Id==41794)
+
+#42031 - predictable enforcement
+predictable.enforcement<-direct.democracy %>% 
+    filter(Indicator.Id==42031)
+
+#41983 - mean years of schooling
+years.schooling <-direct.democracy %>% 
+    filter(Indicator.Id==41983)
+
+
+```
+
+### Joining and cleaning data 
+```{r create forest.percent.change variable, results=FALSE, echo=FALSE}
+
+#create forest percent change variable 
+head(forest.percent)
+
+forest.percent.wide <- spread(forest.percent, date, AG.LND.FRST.ZS)
+
+forest.percent.wide$forest.percent.change.2010 <- forest.percent.wide$`2010` - forest.percent.wide$`2009`
+forest.percent.wide$forest.percent.change.2011 <- forest.percent.wide$`2011` - forest.percent.wide$`2010`
+forest.percent.wide$forest.percent.change.2012 <- forest.percent.wide$`2012` - forest.percent.wide$`2011`
+forest.percent.wide$forest.percent.change.2013 <- forest.percent.wide$`2013` - forest.percent.wide$`2012`
+forest.percent.wide$forest.percent.change.2014 <- forest.percent.wide$`2014` - forest.percent.wide$`2013`
+forest.percent.wide$forest.percent.change.2015 <- forest.percent.wide$`2015` - forest.percent.wide$`2014`
+forest.percent.wide$forest.percent.change.2016 <- forest.percent.wide$`2016` - forest.percent.wide$`2015`
+forest.percent.wide$forest.percent.change.2017 <- forest.percent.wide$`2017` - forest.percent.wide$`2016`
+forest.percent.wide$forest.percent.change.2018 <- forest.percent.wide$`2018` - forest.percent.wide$`2017`
+forest.percent.wide$forest.percent.change.2019 <- forest.percent.wide$`2019` - forest.percent.wide$`2018`
+
+head(forest.percent.wide)
+glimpse(forest.percent.wide)
+```
+
+```{r pivot forest percent change data, results=FALSE, echo=FALSE}
+#forest percent change
+forest.percent.change.long <-forest.percent.wide %>%
+  dplyr::select(3, 69:77) %>%
+         pivot_longer(!country, names_to = "date", values_to = "forest.percent.change")
+```
+
+```{r look at forest percent change data, results=FALSE, echo=FALSE}
+head(forest.percent.change.long)
+```
+
+```{r edit forest percent change data, results=FALSE, echo=FALSE}
+forest.percent.change.long$date<-as.numeric(str_remove(forest.percent.change.long$date, "forest.percent.change."))
+head(forest.percent.change.long)
+```
+
+```{r pivot democracy & schooling data, results=FALSE, echo=FALSE}
+#get rid of unnecessary data and pivot long and fix year
+
+#impartial administration (attribute)
+impartial.administration.long <-impartial.administration %>%
+  dplyr::select(!c(Country.ISO3, Indicator.Id, Indicator,Subindicator.Type)) %>%
+         pivot_longer(!Country.Name, names_to = "date", values_to = "impartial.administration")
+
+impartial.administration.long$date<-as.numeric(str_remove(impartial.administration.long$date, "X"))
+names(impartial.administration.long)[1] <- "country"
+
+#absence of corruption (subattribute)
+absence.corruption.long <-absence.corruption %>%
+  dplyr::select(!c(Country.ISO3, Indicator.Id, Indicator,Subindicator.Type)) %>%
+         pivot_longer(!Country.Name, names_to = "date", values_to = "absence.corruption")
+
+absence.corruption.long$date<-as.numeric(str_remove(absence.corruption.long$date, "X"))
+names(absence.corruption.long)[1] <- "country"
+
+#predictable enforcement (subattribute)
+predictable.enforcement.long <- predictable.enforcement %>%
+  dplyr::select(!c(Country.ISO3, Indicator.Id, Indicator,Subindicator.Type)) %>%
+         pivot_longer(!Country.Name, names_to = "date", values_to = "predictable.enforcement")
+
+predictable.enforcement.long$date<-as.numeric(str_remove(predictable.enforcement.long$date, "X"))
+names(predictable.enforcement.long)[1] <- "country"
+
+#mean years of schooling 
+years.schooling.long <-years.schooling %>%
+  dplyr::select(!c(Country.ISO3, Indicator.Id, Indicator,Subindicator.Type)) %>%
+         pivot_longer(!Country.Name, names_to = "date", values_to = "years.schooling")
+
+years.schooling.long$date<-as.numeric(str_remove(years.schooling.long$date, "X"))
+names(years.schooling.long)[1] <- "country"
+
+
+
+
+```
+
+```{r clean control variable data, results=FALSE, echo=FALSE}
+forest.percent2 <- dplyr::select(forest.percent, -1, -2, -6, -7, -8, -9)
+head(forest.percent2)
+
+forest.area2 <- dplyr::select(forest.area, -1, -2, -6, -7, -8, -9)
+head(forest.area2)
+
+ag.percent2 <- dplyr::select(ag.percent, -1, -2, -6, -7, -8, -9)
+head(ag.percent2)
+
+pop.density2 <- dplyr::select(pop.density, -1, -2, -6, -7, -8, -9)
+head(pop.density2)
+
+GDPpc2 <- dplyr::select(GDPpc, -1, -2, -6, -7, -8, -9)
+head(GDPpc2)
+
+forest.depletion2 <- dplyr::select(forest.depletion, -1, -2, -6, -7, -8, -9)
+
+```
+
+```{r join data, results=FALSE, echo=FALSE}
+#join forest.percent2 and forest.area2
+master.df<-inner_join(forest.percent2, forest.area2, by=c("country"="country", "date"="date"))
+
+#join master.df and ag.percent2
+master.df<-inner_join(master.df, ag.percent2, by=c("country"="country", "date"="date"))
+
+#join master.df and pop.density2
+master.df<-inner_join(master.df, pop.density2, by=c("country"="country", "date"="date"))
+
+#join master.df and GDPpc2
+master.df<-inner_join(master.df, GDPpc2, by=c("country"="country", "date"="date"))
+
+#join master.df and years.schooling
+master.df<-inner_join(master.df, years.schooling.long, by=c("country"="country", "date"="date"))
+
+#join master.df and forest.percent.change.long
+master.df<-inner_join(master.df, forest.percent.change.long, by=c("country"="country", "date"="date"))
+
+#join master.df and impartial.administration.long
+master.df<-inner_join(master.df, impartial.administration.long, by=c("country"="country", "date"="date"))
+
+#join master.df and predictable.enforcement.long
+master.df<-inner_join(master.df, predictable.enforcement.long, by=c("country"="country", "date"="date"))
+
+#join master.df and absence.corruption.long
+master.df<-inner_join(master.df, absence.corruption.long, by=c("country"="country", "date"="date"))
+
+
+#join master df and foreest depletion
+master.df<-inner_join(master.df, forest.depletion2, by=c("country"="country", "date"="date"))
+
+head(master.df)
+```
+
+```{r rename columns on joined data, results=FALSE, echo=FALSE}
+#rename columns
+
+#AG.LND.FRST.ZS = forest.percent ; AG.LND.FRST.K2 = forest.area ; AG.LND.AGRI.ZS = ag.percent ; EN.POP.DNST = popn.density ; NY.GDP.PCAP.CD = GDP.per.capita 
+
+colnames <- c("country", "year", "forest_percent", "forest_area", "ag_percent", "pop_density", "GDP_per_capita", "years_schooling", "forest_percent_change", "impartial_admin", "predictable_enforcement", "absence_corruption", "forest_depletion")
+
+names(master.df) <- colnames
+
+#check dataframe
+head(master.df)
+
+```
+```{r dataframe of missingness across country-year }
+missing.bycountry<-master.df %>% 
+  group_by(country, year) %>% 
+  summarise(sumNA.forest.percent = sum(is.na(forest_percent )),
+            sumNA.forest.area = sum(is.na(forest_area)),
+            sumNA.ag.percent = sum(is.na(ag_percent)),
+            sumNA.pop.density = sum(is.na(pop_density)),
+            sumNA.GDP.per.capita = sum(is.na(GDP_per_capita)),
+            sumNA.years.schooling = sum(is.na(years_schooling)),
+            sumNA.forest.percent.change = sum(is.na(forest_percent_change)),
+            sumNA.impartial.admin = sum(is.na(impartial_admin)),
+            sumNA.predictable.enforcement = sum(is.na(predictable_enforcement)),
+            sumNA.absence.corruption = sum(is.na(absence_corruption)),
+            ) %>%
+  filter(sumNA.forest.percent>0 | 
+           sumNA.forest.area>0 |
+           sumNA.ag.percent>0 |
+           sumNA.pop.density>0 |
+           sumNA.GDP.per.capita>0 |
+         sumNA.years.schooling>0 |
+            sumNA.forest.percent.change>0 |
+            sumNA.impartial.admin>0 |
+            sumNA.predictable.enforcement>0 |
+           sumNA.absence.corruption>0
+         )
+
+missing.bycountry
+
+```
+
+```{r look at data, results=FALSE, echo=FALSE}
+#glimpse
+glimpse(master.df)
+
+#check na
+sapply(master.df, function(x) sum(is.na(x)))
+```
+
+
+
+```{r cronbach alpha, results=FALSE, echo=TRUE}
+#FROM MALKIE -- Not sure what this code is. @Frankie can you check whether it still makes sense? I noticed there is a master2.df and we currently only have a master.df
+
+cronbach.alpha(master.df[,c(11,12)], na.rm = TRUE)
+
+#higher the value, the more the variables in the index tend to correlate. A rule of thumb is that 0.7 indicates that the scale is "reliable" c
+#in case the total Cronbach’s Alpha value is below the acceptable cut-off of 0.7 (mostly if an index has few items), the mean inter-item-correlation is an alternative measure to indicate acceptability; satisfactory range lies between 0.2 and 0.4
+```
+
+
+### Exploratory Data Analysis
+
+*WE ONLY NEED ONE OF THE FOLLOWING TWO CHUNKS (SEE NOTE). DELETE THE OTHER ONE.* 
+```{r summary table, message=FALSE, results=TRUE, echo=FALSE}
+
+#convert to data frame because its in a strange format because of dyplr
+master.df <- as.data.frame(master.df)
+
+master.df.long <- melt(data = master.df, id.vars = c("country", "year"))
+
+summary.master.df.long <- master.df.long %>% 
+  dplyr::group_by(variable) %>%
+  dplyr::select(value) %>%
+  dplyr::summarize(
+                    length_value =length(value) - sum(is.na(value)) , #length of value for each variable minus the sum of NA (2)
+                    mean_value=mean(value, na.rm = TRUE), #remove NA
+                    median_value=median(value, na.rm = TRUE), #remove NA
+                    min_value=min(value, na.rm=TRUE), #remove NA
+                    max_value=max(value, na.rm = TRUE), #remove NA
+                    sd_value=sd(value, na.rm = TRUE), #remove NA
+                    skew_value=skewness(value, na.rm = TRUE), #remove NA
+                    )
+
+# report source
+source <- "Data Source: World Bank"
+
+# make gt summary box
+summary.master.df.long %>%
+gt() %>%
+  tab_header(
+    title = md("Summary Statistics"),
+    subtitle = " ") %>% tab_source_note(
+    source_note = source) %>%
+  
+ 
+  fmt_passthrough (columns=c(variable)) %>%
+  fmt_number(columns = c(length_value), decimals = 2) %>%
+  fmt_number(columns = c(mean_value), decimals= 2) %>%
+  fmt_number(columns = c(median_value), decimals = 2) %>%
+  fmt_number(columns = c(min_value), decimals = 2) %>%
+  fmt_number(columns = c(max_value), decimals = 2) %>%
+  fmt_number(columns = c(sd_value), decimals = 2) %>%
+  fmt_number(columns = c(skew_value), decimals = 2) %>%
+
+cols_label(
+    variable="Variable",
+    length_value = "Observations",
+    mean_value = "Mean",
+    median_value = "Median",
+    min_value = "Minimum",
+    max_value = "Maximum",
+    sd_value = "SD",
+    skew_value = "Skewness")
+
+```
+
+#### Scatterplots
+
+
+```{r log variables, echo = FALSE}
+#Based on the scatterplots above, we decided to transform a few variables
+#logged pop.density, gddpc, & forest.area
+
+#population.density
+master.df$log_pop_density <- log(master.df$pop_density)
+
+#GDP.per.capita
+master.df$log_gdppc <- log(master.df$GDP_per_capita)
+
+#forest.area
+master.df$log_forest_area <- log(master.df$forest_area + .0000001)
+
+
+glimpse(master.df)
+```
+
+
+```{r model1 correlation matrix, message=FALSE, results=FALSE, echo=FALSE, fig.height=10, fig.width=10}
+# @Frankie - Add in the columns you want for our model1 (including any transformed variables). Right now, I've included logged pop.density, forest.area, and gdppc
+
+pairs.panels(master.df[c(14:16,5,8,10:12, 9)], #response variable should be in last column
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             pch=".",
+             density = TRUE,  # show density plots
+             ellipses = FALSE)# show correlation ellipses
+
+
+```
+
+*NOTE FROM MALKIE: The scatterplot matrix shows a very strong correlation among our impartial administration variables, so we should probably only include one at a time in our model...*
+
+
+
+```{r subset pos and neg deforestation}
+#CREATE DEFOFRESTATION DATA FRAME
+#postive deforestion (NEGATIVE FOREST AREA CHANGE)
+df_positive_def_rate <- master.df[master.df$forest_percent_change<0,]
+
+#negative deforestation (POSITIVE FOREST AREA CHANGE)
+df_negative_def_rate <- master.df[master.df$forest_percent_change>0,]
+
+```
+
+
+## Models
+
+### MODEL 1- ALL COUNTRIES USING IMPARTIAL_ADMIN USING FIXED EFFECTS
+```{r FIXED EFFECTS MODEL}
+FE_all <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = master.df,
+                   index = c("country", "year"),
+                  model = "within")
+summary(FE_all)
+```
+
+#### ALL COUNTRIES USING IMPARTIAL_ADMIN USING RANDOM EFFECTS
+```{r RANDOM EFFECTS model }
+RE_all <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = master.df,
+                   index = c("country", "year"),
+                  model = "random")
+summary(RE_all)
+```
+
+##### TESTING
+```{r PHTEST}
+phtest(FE_all, RE_all)
+
+#Ho: RANDOM EFFECTS is consistent
+#Ha FE is consistant
+
+##If p value is < 0.05 then use fixed effects
+```
+
+
+```{r model1 breusch pagan test}
+#Testing for homoskedasticity
+plmtest(RE_all, c("time"), type=c("bp"))
+
+#he null hypothesis that heteroskedasticity is not present
+#failed to reject null
+# DONT HAVE HETEROSKEDASTICITY
+
+```
+
+
+## Model 1a - JUST DEFORESTATION COUNTRIES
+
+#### FIXED EFFECTS
+```{r FIXED EFFECTS MODEL DEFORESTATION ONLY}
+FE_all_deforestation <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = df_positive_def_rate,
+                   index = c("country", "year"),
+                  model = "within")
+summary(FE_all_deforestation)
+```
+
+#### DEFORESTATION COUNTRIES USING IMPARTIAL_ADMIN USING RANDOM EFFECTS
+```{r RANDOM EFFECTS model deforestation all countries }
+RE_all_deforestation <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = df_positive_def_rate,
+                   index = c("country", "year"),
+                  model = "random")
+summary(RE_all_deforestation)
+```
+##### TESTING
+```{r PHTEST deforested countries}
+phtest(FE_all_deforestation, RE_all_deforestation)
+
+#Ho: RANDOM EFFECTS is consistent
+#Ha FE is consistant
+
+##If p value is < 0.05 then use fixed effects
+## CHOSE FE_ALL going forward
+```
+
+
+```{r model1 deforestation breusch pagan test}
+#Testing for homoskedasticity
+plmtest(RE_all_deforestation, c("time"), type=c("bp"))
+
+#he null hypothesis that heteroskedasticity is not present
+#failed to reject null
+# DONT HAVE HETEROSKEDASTICITY
+
+```
+
+
+## Model 2 - Filter for South America
+
+```{r South America }
+
+master.df.SA <-master.df %>%
+  filter(country=="Argentina"|country=="Bolivia"|country=="Brazil"|country=="Chile"|country=="Ecuador"|country=="Guyana"|country=="Paraguay"|country=="Peru"|country=="Suriname"|country=="Uruguay"|country=="Venezuela")
+```
+
+
+```{r FIXED EFFECTS MODEL SOUTH AMERICA}
+FE_SA <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = master.df.SA,
+                   index = c("country", "year"),
+                  model = "within")
+
+summary(FE_SA)
+```
+
+```{r model2 breusch pagan test}
+#Testing for homoskedasticity
+plmtest(FE_SA, c("time"), type=c("bp"))
+
+#he null hypothesis that heteroskedasticity is not present
+#failed to reject null
+# DONT HAVE HETEROSKEDASTICITY
+
+```
+
+
+### SUBSETTING TROPICAL COUNTRIES
+```{r subsetting tropical countries}
+library(data.table)
+tropical_countries <- fread("/Users/frankiechiappetta/Desktop/csvData.csv")
+tropical_countries
+
+tropical_countries2 <- setDT(master.df)[country %chin% tropical_countries$country]
+tropical_countries2
+```
+
+```{r FIXED EFFECTS MODEL TROPICAL COUNTRIES}
+FE_tropical <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = tropical_countries2,
+                   index = c("country", "year"),
+                  model = "within")
+summary(FE_tropical)
+```
+
+
+```{r RANDOM EFFECTS model TROPICAL COUNTRIES}
+RE_tropical <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = tropical_countries2,
+                   index = c("country", "year"),
+                  model = "random")
+summary(RE_tropical)
+```
+
+```{r PHTEST tropical countries }
+phtest(FE_tropical, RE_tropical)
+
+#Ho: RANDOM EFFECTS is consistent
+#Ha FE is consistant
+
+## CHOSE RE going forward
+```
+
+
+```{r breusch pagan test tropical countries }
+#Testing for homoskedasticity
+plmtest(RE_tropical, c("time"), type=c("bp"))
+
+#he null hypothesis that heteroskedasticity is not present
+#failed to reject null
+# DONT HAVE HETEROSKEDASTICITY
+
+```
+
+
+
+```{r DEFORESTED TROPICAL COUNTRIES}
+
+tropical_countries_deforested <- setDT(df_positive_def_rate)[country %chin% tropical_countries$country]
+tropical_countries_deforested
+
+```
+
+
+```{r FIXED EFFECTS MODEL DEFORESTED TROPICAL COUNTRIES}
+FE_tropical_deforested <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = tropical_countries_deforested,
+                   index = c("country", "year"),
+                  model = "within")
+summary(FE_tropical_deforested)
+```
+
+
+```{r RANDOM EFFECTS model DEFORESTED TROPICAL COUNTRIES}
+RE_tropical_deforested <- plm(forest_percent_change ~ impartial_admin + years_schooling + ag_percent + log_forest_area + log_gdppc + I(log_gdppc^2) + log_pop_density,
+                   data = tropical_countries_deforested,
+                   index = c("country", "year"),
+                  model = "random")
+summary(RE_tropical_deforested)
+```
+
+```{r PHTEST deforested tropical countries }
+phtest(FE_tropical_deforested, RE_tropical_deforested)
+
+#Ho: RANDOM EFFECTS is consistent
+#Ha FE is consistant
+
+## CHOSE RE going forward becuase p > 0.05
+```
+
+
+```{r breusch pagan test deforested tropical countries }
+#Testing for homoskedasticity
+plmtest(RE_tropical_deforested, c("time"), type=c("bp"))
+
+#he null hypothesis that heteroskedasticity is not present
+#failed to reject null
+# DONT HAVE HETEROSKEDASTICITY
+
+```

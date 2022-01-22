@@ -1,0 +1,1079 @@
+---
+title: "Impartial Governance and deforestation: a cross-sectional analysis at the country level from 2014 and 2019"
+author: "Francesca Chiappetta, Malkie Wall, Chrissie Pantoja"
+date: "12/9/2021"
+output:
+  html_document: default
+---
+
+# Introduction 
+Deforestation is a consistent and pressing issue in the world today. During the period of 2014-2019, 25% of tree cover loss occurred in areas where the dominant drivers of loss resulted in deforestation (GFW, 2020). As a result, the world has lost 37.32 million hectares of forest cover over that period, an average of 7.46 million hectares of forest cover per year. Forests provide a multitude of benefits to families and businesses, including clean water, food, disease and climate regulation, ecotourism, etc (TEEB,2010). Deforestation, defined as the permanent conversion of forest land to another land use (FAO, 2001), seriously damages both biodiversity and ecosystem services. 
+
+There is extensive literature on the drivers of deforestation. Agricultural production, population growth, economic development, and education have routinely been found to drive deforestation. One of the most-widely cited studies on deforestation comes from Hosonuma et al. (2012), which estimates that 73% of tropical deforestation in developing countries is driven by agriculture. In another study, Geist and Lambin (2002) conducted a meta-analysis of 152 subnational studies on deforestation to find that natural population growth drives the expansion of cropped land and pasture in 47% of the cases in Africa and Latin America and 22% in Asia, concomitantly with other underlying drivers. Jha and Bawa (2006) also find that high population growth and low human development may cause high rates of deforestation. Meanwhile, Crespo Cuaresma et al. (2017) postulate that countries with higher GDP per capita tend to have significantly lower forest cover within the group of low-income economies. Other empirical studies also find a positive relation between GDP per capita and the rate of deforestation (Capistrano and Kiker, 1995, Kurtilla et al., 1995). Moreover, Buitenzorgy and Mol (2010) and Cary and Bekun (2021) find that deforestation is inversely related to the education level; higher levels of education suggest that a country is more likely to protect their forests. 
+  
+In this study, we examine the relationship between democratic governance and deforestation. There is extensive literature that already exists on democracy as a driver of deforestation (Didia, 1997; Larjavaara, 2012; Cary and Bekun, 2021). However, there is conflicting evidence as to whether democracy has an effect on deforestation and environmental outcomes. For example, Scruggs (1998) and Roberts and Parks (2007) found an insignificant relationship between democracy and environmental outcomes.  Furthermore, Midlarsky (1998) and Ehrhardt-Martinez et al. (2002) find that higher levels of democracy contribute to greater levels of deforestation. However, Didia (1997), Li and Reuveny (2006), and  Shandra (2007), among others, also find evidence that increased democracy leads to decreased rates of deforestation. Umemiya et al. (2010) find that an increase in governance quality tends to be associated with a decrease in deforestation rates (i.e., a lower level of deforestation). We seek to further explore this relationship between governance quality and deforestation in our study. Democracy is not only a matter of access to power, but also control of power (Tufis, 2020). If the government implements official public policies in an unfair or unpredictable manner, it can undermine democratic principles and the effectiveness of government policies. In the context of deforestation, a country with unfair or arbitrary governance might be less likely to enforce laws or policies that prohibit deforestation. 
+
+Our study sought to answer the question: Is there an association between impartial governance, as measured by impartial administration under democratic principles, and deforestation? Based on the literature and the unpredictability of government performance, we hypothesized that higher levels of impartial governance would be associated with deforestation (negative forest area change). 
+
+Studies on the relationship between impartial governance and deforestation are scarce, in particular from the perspective of the performance of democracy. Therefore, the main objective in this paper is to explore the impact of impartial governance on deforestation in 148 countries for the period 2014-2019. 
+
+
+
+# Description of Variables
+
+
+*Table of Variables*
+  
+| Variable type     | Variable                   | Years            | Source           |
+|:-----------------:|:--------------------------:|:----------------:|:----------------:|
+| Response          | Forest Area                | 2014, 2019       | World Bank       |               
+| Explanatory       | Impartial Adiministration  | 2014             | World Bank       |               
+| Control           | Forest/ Land Ratio         | 2014             | World Bank       |               
+|                   | Population Growth          | 2009, 2014, 2019 | World Bank       |             
+|                   | Agriculture/ Land Ratio    | 2013, 2018       | World Bank       |     
+|                   | GDP per capita             | 2009, 2014, 2019 | World Bank       |     
+|                   | Mean Years of Schooling    | 2014             | World Bank       |     
+
+
+
+**Impartial governance**
+  
+To measure impartial governance we used a variable from the Global State of Democracy Indices called “impartial administration.” Impartial administration is an index scaled from 0 to 1 that aggregates two sub attributes measuring 1) absence of corruption and 2) predictable enforcement. Those sub attributes, in turn, represent a combined 11 indicators measuring things such as public sector corruption, predictable enforcement, rigorous and impartial administration, and bureaucratic quality. The data underlying the Global State of Democracy Indices is based on a total of 116 indicators developed by various scholars and organizations using a variety of sampling methods, including expert surveys, standards-based coding by research groups, observational data, and composite measures. 
+
+**Deforestation**
+  
+Using data from the World Bank, deforestation rates were calculated as the ratio of the change in forest area between 2014 and 2019, compared to the forest area in 2014. This follows the approach used by Umemiya et al. (2010). The World Bank pulls data from the Food and Agricultural Organization (FAO) which collects data at 5-10 year intervals as part of the Global Forest Resources Assessment (FRA). The FAO reports data for 229 countries and territories; it does not include 56 small island states where no information is provided. Note that we initially used a tree cover loss indicator from Global Forest Watch to measure deforestation but decided to switch our response variable after further exploration of the literature. 
+
+**Other explanatory variables**
+  
+We also included 5 control variables in our model: ratio of forest cover to total land (forest percent) in 2014, mean years of schooling in 2014 (an index variable scaled from 0-1), % change in GDP per capita from 2009-2014, % change in population from 2009-2014, and % change in agriculture land from 2013 to 2018. We selected our variables based on their supposed relevance in the literature. We constructed our growth variables following the approach used by Umemiya et al. (2010). We then ran a Pearson’s correlation matrix to find that percent change in impartial administration from 2009-2014 had a stronger correlation with the change in forest area between 2014 and 2019 than impartial administration from 2014-2019 did. Based on this, we chose to use time lagged variables (for the time period 2009-2014) for GDP per capita and population growth in our models. Because there was no data available for agricultural land in 2019, the time period for agricultural growth was shifted back a year to 2013-2018. All of our control variables come from the World Bank indicators, with the exception of mean years of schooling, which comes from the Global State of Democracy Indices.
+
+## Summary Statistics
+**All Countries**
+  
+Table 1 presents the summary statistics of the response variable and explanatory variables for all countries. While there are over 200 observations (countries) total in our dataset, a number of countries have missing data for one or more of the explanatory variables (see Table 2a-b). As a result, our regression model ran on 148 observations (see Figure 15). Looking at all countries, forest area decreased by roughly 1%, on average from 2014 to 2019. Total population grew by 1%, on average, in the lagged time period (2009-2014). Per capita GDP grew by 32%, on average, over the same time period (2009-2014). Both population growth (pop_growth_2009_2014) and change in agricultural land (ag_change_2013_2018) are positively skewed.
+
+Based on our scatterplot matrix we chose not to transform any of our variables (see Figure 1). Note that observations of % change in population and % change in agricultural land appear to be clustered around the y-axis, however, logging them would create interpretation issues since they’re already in percentages, so we chose to leave them as-is.
+
+**Tropical Countries**
+  
+We ran our second model on a subset of data for tropical countries. Table 4 presents summary statistics for this sample. There are 76 countries included in the tropical dataset and 60 observations of our explanatory variable, impartial_administration_2014. Among tropical countries, change in forest area averaged -2% from 2014-2019, with a standard deviation of 3.5%. As might be expected given that these countries are in the tropics, average percent forest coverage in 2014 was also higher in this sample than in the all countries dataset. Average population growth was roughly 1% over the lagged period (2009-2014). Lagged per capita GDP growth was slightly higher (35%) in the tropical countries subset than in the all countries dataset. Also of note, the population growth variable is positively skewed (the other variables have small skews) and several of the variables (e.g. forest_percent_2014 and years_schooling_2014) have relatively large standard deviations. 
+
+Based on our scatterplot matrix we chose not to transform any variables (see Figure 2). We noticed that % change in population and % change in agricultural land appear to be clustered around the y-axis but we chose not to log the data to avoid issues with interpretation (given that the variables were already in percentages). 
+
+
+
+# Statistical Analysis
+
+## Methods
+We initially tried using panel data from 2010-2020 to examine the association between impartial administration and deforestation. First we ran fixed effects and random effects models with the same control and explanatory variables outlined above, but with Global Forest Watch tree cover change data for response variable. We decided on panel data looking at the same countries (cross-sectional) each year (longitudinal).  The control variables consisted of agricultural percent, population growth, mean years of schooling, total forest percent, and change in GDP per capita. The choice of control variables was determined to be consistent with previous studies Umemiya et al. (2010) and also aligned with findings from the literature (Hosonuma et al., 2012; Jha and Bawa, 2006; Crespo Cuaresma et al., 2017).
+
+We did not find a statistically significant relationship between tree cover change and our governance indicators.  However, the Global Forest Watch data measures tree cover change, not just forest cover change. Tree cover change also incorporates afforestation from agriculture to tree plantations and other tree cover, but not forest cover changes. 
+
+Next we used panel data from 2010-2020 using the same variables as above, but with the percent change in forest area from the prior year (calculated using World Bank Data) the explanatory variable.
+
+We also subset our data frames by “deforestation” (i.e. filtering for observations where the forest area change was less than 0), in accordance with the methodology used by Umemiya et al. (2010). Using the panel data, we ran fixed effects and random effects models for all countries, all deforested countries, South American countries, tropical countries, and deforested tropical countries. However, we found no statistically significant relationship between forest area change and our governance indicator, the year-to-year differences were likely too granular, so the models didn’t pick up much of a change. 
+
+We ultimately settled on a cross-sectional approach, using % change in forest from 2014-2019 as our response variable. For our explanatory variables we used the target explanatory variable and the control variables outlined in the Description of the Variables section. We ran a multiple linear regression for all countries, all deforested countries, tropical countries, and deforested tropical countries. We chose to subset the data to deforested countries based on the findings of Umemiya et al. (2010), who found a statistically significant relationship between countries with negative forest change (positive deforestation rate) and governance indicators from 2000-2005. 
+
+
+## Models
+Our final model can be characterized using the following equation:
+
+*forest_area_change_2014_2019 = β0 + β1impartial_admin_2014 + β2forest_percent_2014 + β3pop_growth_2009_2014 + β4GDPpc_growth_2009_2014 + β5ag_change_2013_2018 + β6years_schooling_2014*
+
+We employed a multiple linear regression model to estimate the impact of each indicator on percent change in forest area between 2014 and 2019, i.e. deforestation.
+
+**All Countries (Model 1)**
+  
+Considering all countries, we did not find a statistically significant relationship between impartial administration and percent forest area change (see Results 1b). Indeed, the only explanatory variable that appears to be statistically significant is the mean years of schooling. Holding all else constant, a one unit increase in mean years schooling (i.e. going from an index score to 0 to a score of 1) is associated with a 6 percent increase in forest area between 2014 and 2019 (p < 0.001). This aligns with our expectation that higher levels of human capital, measured here by mean years of schooling, would be associated with lower levels of deforestation.
+
+The R2 value for Model 1 was 0.186 (see Figure 15).
+
+The red line in the residual vs. fitted plot for Model 1 (Figure 4) is flat and close to zero, indicating that our linearity assumption is met and that our betas are not biased. The Cook’s Distance test (0.5 threshold) determined that there were no outliers (Figure 3). The VIF test (Figure 5) also suggests that the model meets the assumption of no perfect collinearity (VIF < 4). However, the model this not meet the homoscedasticity assumption required in multilinear regression models (p-value of Breusch-Pagan test <0.5). Therefore, the betas were recalculated using robust standard errors (Results 1b). We present the robust coefficients in the section above. 
+
+**All Deforested Countries (Model 2)**
+  
+Using  the methodology from Umemiya et al. (2010), we also ran the model on a subset of deforested countries (i.e. countries where the percent change in forest area was negative). Again, we did not find statistically significant association between impartial  administration and percent forest area change (see Results 2c) subsetting for deforested countries (i.e. countries where the percent change in forest area was negative). The only explanatory variable that was statistically significant in this case, was the percent forested land. Holding all else constant, a one unit increase in forest percent was associated with a 0.0006 unit increase in forest area change (p=0.001). This matches our expectations, as we would expect deforestation rates to be higher in places where more of the land is forested.
+
+The R2 value for Model 2 was 0.289, slightly higher than Model 1 (see Figure 15).
+
+The Cook’s Distance test (.5 threshold) identified one outlier (Figure 6), which was removed and the regression was rerun (Results 2b). The red line in the residuals vs. fitted plot is relatively close to zero, but isn’t entirely flat, so our linearity assumption may not hold (Figure 7). The model showed no evidence of multicollinearity (VIF < 4) (Figure 8). However, there was evidence of heteroskedasticity (p-value of Breush-Pagan test <0.5), so we analyzed our coefficients using robust standard errors (Results 2c).
+
+**Tropical Countries (Model 3)**
+  
+After subsetting for tropical countries, there was still no statistically significant relationship between impartial administration and percent forest area change (see Results 3c). There is some evidence of a positive association between mean years of schooling and percent forest area change: A one unit increase in mean years schooling is associated with a 4% increase in forest area (p<0.1). In addition, there is convincing evidence that a one unit increase in percent forest coverage is associated with a 0.06% increase in forest area (p<0.01). 
+
+The R2 value for Model 3 is 0.283, similar to Model 2 (see Figure 15).
+
+The residual vs. fitted plot for Model 3 (see Figure 10) suggests that the linearity assumption holds. However, the Cook’s Distance test (.5 threshold) identified one outlier in the tropical countries model (Figure 9). We removed the outlier and reran the regression in Results 3b. The model showed no evidence of multicollinearity (VIF < 4) (Figure 11), however there was evidence of heteroskedasticity (p-value of Breusch-Pagan test <0.5). As a result, we analyzed our coefficients using robust standard errors (Results 3c).
+
+**Deforested Tropical Countries (Model 4)**
+  
+Finally, we tried subsetting for deforested tropical countries. The results were very similar to Model 3 (see Results 4a), with forest percent in 2014 being the only explanatory variable with a statistically significant association. 
+
+The R2 value for Model 4 was 0.252, similar to Models 2 and 3 (see Figure 15).
+
+The red line of our residual vs. fitted plot is relatively flat and close to zero (Figure 13), so our linearity assumption likely holds for Model 4. The Cook’s Distance test (.5 threshold) indicated no outliers (Figure 12). There is no evidence of multicollinearity (VIF < 4) (Figure 14), and the homoscedasticity assumption appears to be met.
+
+
+
+
+# Results and Limitations
+Ultimately, none of our models showed a statistically significant relationship between impartial governance and forest cover change. Neither was there a statistically significant relationship between forest cover change and most of our explanatory variables. Indeed, the only two variables that were associated with forest cover change were years of schooling (in Models 2 and 3) and percent forested land (in Models 2, 3, and 4). Because our models used a non-random sample of countries (i.e. only  countries with available data), the results cannot be generalized to all countries. 
+
+Our findings do not align with our hypothesis or other literature that has found statistically significant relationships between governance and forest change (Umemiya, et al., 2010). This inconsistency could be a result of multiple factors.
+
+First, the World Bank data that we used was not a completely random sample, as only countries with reported values were included in the dataset. In addition, we had to drop countries where data was unavailable for one or more variables. The majority of these dropped countries are small and island nations (see Tables 2a-b and Table 4), further limiting the generalizability of the results. The non random sample introduces bias in that the countries selected for analysis are the ones that had data readily available. Additionally, the World Bank reports that the lag between the reported year and the actual year the data was measured varies between countries. This lag in data reporting could be contributing to the lack of statistically significant results.
+
+Furthermore, our model itself has limitations. One major issue is that our response variable, as a percent, is bounded by 0 and 100. This poses challenges because, in reality, predictions are not bounded by the range of 0 to 1. There might also be omitted variable bias, which would bias the coefficients. In our model we only include one attribute of democracy (impartial administration). Ideally, we would also include other attributes of governance, such as whether a country has a policy banning deforestation. This would allow us to parse out whether a lack of enforcement or an absence of policies is driving deforestation. Further analysis of the literature would give insight into additional variables that might drive forest change. We would also look for a more robust forest dataset at the country level.
+
+Recent studies have indicated that one solution might be to modeling the relationship between democracy and deforestation not as a linear one, but as an inverted U-shape, better known under the concept of Environmental Kuznets Curve (EKC) (Buitenzorgy and Mol, 2011; Cary and Bekun, 2021). The EKC hypothesis asserts that there is a quadratic relationship between the explanatory variable of interest (i.e., democracy) and deforestation. One major study on the relationship between democracy and deforestation by Buitenzorgy and Mol (2011), that used simple Ordinary Least Squared (OLS) regression models, found that after controlling for income (measured as GDP per capita), democracy did affect deforestation rates as expected under the EKC hypothesis. They used deforestation data which describes changes in forest cover from 1990 to 2000. An extension of this previous study, including the period from 2000 to 2010, with robust standard errors still finds that democracy leads to decreased rates of deforestation (Cary and Bekun, 2021). As an interesting fact, Imai et al. (2018) observed that the effect of democracy on deforestation rates tends to be the highest in nations transitioning to democracy. We could incorporate these concepts into a future model by adding a quadratic of impartial administration.
+
+Our estimates might also be improved by gathering data at the local or district level from each country (Magalhães Filho et al. 2021), or by using high-resolution spatial data, as was done by Cary ad Bekun (2021). This would help us get around issues of regional autocorrelation. Finally, if given more time and resources, we would return to a panel data set and look at five year increments. Multiple studies have shown governance to be a driver of deforestation at the country level. It could be that during our time scope from 2014 to 2019 that governance was simply not a significant driver of deforestation. Using panel data would allow us to better control longitudinal differences.
+
+Ultimately further research is needed to improve upon our methodology and strengthen our ability to evaluate the relationship between impartial administration and deforestation rates. 
+
+
+
+
+# References
+  Buitenzorgy, Meilanie, and Arthur P. J. Mol. 2011. “Does Democracy Lead to a Better Environment? Deforestation and the Democratic Transition Peak.” Environmental and Resource Economics 48 (1): 59–70. https://doi.org/10.1007/s10640-010-9397-y.
+  
+  Capistrano, Ana Doris, and Clyde F. Kiker. 1995. “Macro-Scale Economic Influences on Tropical Forest Depletion.” Ecological Economics 14 (1): 21–29. https://doi.org/10.1016/0921-8009(95)00008-W.
+  
+  Cary, Michael, and Festus Victor Bekun. 2021. “Democracy and Deforestation: The Role of Spillover Effects.” Forest Policy and Economics 125 (April): 102398. https://doi.org/10.1016/J.FORPOL.2021.102398.
+  
+  Crespo Cuaresma, Jesús, Olha Danylo, Steffen Fritz, Ian McCallum, Michael Obersteiner, Linda See, and Brian Walsh. 2017. “Economic Development and Forest Cover: Evidence from Satellite Data.” Scientific Reports 2017 7:1 7 (1): 1–8. https://doi.org/10.1038/srep40678.
+  
+  Didia, Dal O. 1997. “Democracy, Political Instability and Tropical Deforestation.” Global Environmental Change 7 (1): 63–76. https://doi.org/10.1016/S0959-3780(96)00024-6.
+  
+  Ehrhardt-Martinez, Karen, Edward M. Crenshaw, and J. Craig Jenkins. 2002. “Deforestation and the Environmental Kuznets Curve: A Cross-National Investigation of Intervening Mechanisms.” Social Science Quarterly 83 (1): 226–43. https://doi.org/10.1111/1540-6237.00080.
+  
+  FAO. 2001. “Global Forest Resources Assessment.” Food and Agriculture Organization.
+  
+  Geist, Helmut J., and Eric F. Lambin. 2002. “Proximate Causes and Underlying Driving Forces of Tropical Deforestation: Tropical Forests Are Disappearing as the Result of Many Pressures, Both Local and Regional, Acting in Various Combinations in Different Geographical Locations.” BioScience 52 (2): 143–50. https://doi.org/10.1641/0006-3568(2002)052[0143:PCAUDF]2.0.CO;2.
+
+  GFW. 2020. “Peru Deforestation Rates & Statistics.” Global Forest Watch Peru 2001-2020. 2020. https://www.globalforestwatch.org/dashboards/country/PER/?category=summary&location=WyJjb3VudHJ5IiwiUEVSIl0%3D&map=eyJjZW50ZXIiOnsibGF0IjotOS4zMTQzODA4NDc0Mzg4ODIsImxuZyI6LTc0Ljk5MTc0ODgwOTk5MTI4fSwiem9vbSI6Mi45Nzc3OTk3OTA1MTA3OTAyLCJjYW5Cb3VuZCI6ZmFsc2Us.
+
+  Hosonuma, Noriko, Martin Herold, Veronique De Sy, Ruth S. De Fries, M. Brockhaus, L. Verchot, A. Angelsen, and E. Romijn. 2012. “An Assessment of Deforestation and Forest Degradation Drivers in Developing Countries.” Environmental Research Letters 7 (4): 044009. https://doi.org/10.1088/1748-9326/7/4/044009.
+
+  Imai, Nobuo, Takuya Furukawa, Riyou Tsujino, Shumpei Kitamura, and Takakazu Yumoto. 2018. “Factors Affecting Forest Area Change in Southeast Asia during 1980-2010.” PLOS ONE 13 (5): e0197391. https://doi.org/10.1371/JOURNAL.PONE.0197391.
+
+  Jha, S., and K. S. Bawa. 2006. “Population Growth, Human Development, and Deforestation in Biodiversity Hotspots.” Conservation Biology 20 (3): 906–12. https://doi.org/10.1111/J.1523-1739.2006.00398.X.
+
+  Kurtilla, K., W. F. Hyde, and D. F. Barnes. 1995. “Urban Energy Consumption and Peri-Urban Deforestation.” Ecological Management 74 (2): 181–95.
+
+  Larjavaara, M. 2012. “Democratic Less-Developed Countries Cause Global Deforestation.” International Forestry Review 14 (3): 299–313. https://doi.org/10.1505/146554812802646666.
+
+  Li, Quan, and Rafael Reuveny. 2006. “Democracy and Environmental Degradation.” International Studies Quarterly 50 (4): 935–56. https://doi.org/10.1111/J.1468-2478.2006.00432.X.
+
+  Magalhães Filho, Luiz, Peter Roebeling, Maria Isabel Bastos, Waldecy Rodrigues, and Giulia 
+Ometto. 2021. “A Global Meta-Analysis for Estimating Local Ecosystem Service Value Functions.” Environments 2021, Vol. 8, Page 76 8 (8): 76. https://doi.org/10.3390/ENVIRONMENTS8080076.
+
+  Midlarsky, Manus I. 2016. “Democracy and the Environment: An Empirical Assessment:” Http://Dx.Doi.Org/10.1177/0022343398035003005 35 (3): 341–61. https://doi.org/10.1177/0022343398035003005.
+
+  Parks, Bradley C., and J. Timmons Roberts. 2010. “Climate Change, Social Theory and Justice:” Http://Dx.Doi.Org/10.1177/0263276409359018 27 (2): 134–66. https://doi.org/10.1177/0263276409359018.
+
+  Scruggs, Lyle A. 1998. “Political and Economic Inequality and the Environment.” Ecological 
+Economics 26 (3): 259–75. https://doi.org/10.1016/S0921-8009(97)00118-3.
+
+  Shandra, John M. 2007. “Economic Dependency, Repression, and Deforestation: A Quantitative, Cross-National Analysis*.” Sociological Inquiry 77 (4): 543–71. https://doi.org/10.1111/J.1475-682X.2007.00209.X.
+
+  TEEB. 2010. The Economics of Ecosystems and Biodiversity: The Ecological and Economic Foundations. Edited by Pushpam Kumar. London and Washington: Earthscan.
+
+  Tufis, Claudiu D. 2020. “The Global State of Democracy Indices Codebook.” https://doi.org/10.31752/idea.2020.71.
+
+  Umemiya, Chisa, Ewald Rametsteiner, and Florian Kraxner. 2010. “Quantifying the Impacts of the Quality of Governance on Deforestation.” Environmental Science & Policy 13 (8): 695–701. https://doi.org/10.1016/J.ENVSCI.2010.07.002.
+
+
+
+# Appendix
+
+
+```{r libraries, include=FALSE, message=FALSE, warning=FALSE, echo=FALSE,results=FALSE}
+# DATA ENGINEERING
+
+
+library(wbstats) #package to get worldbank data
+library(rio)
+library(tidyverse)
+library(tidyr)
+library(stringr) #used to clean up strings of text.
+library(openxlsx)
+library(panelr)
+library(dplyr)
+library(knitr)
+library(reshape) # a package to melt data
+library(moments) #find skewness
+library(gt) # a package to make tables
+library(psych) #package to make panel plots 
+library(GGally) #scatterplot matrix
+library(plotly)
+library(ggplot2)
+library(skimr)
+library(plm)
+library(sandwich) # a package that includes functions for robust standard errors 
+library(car) # a companion to applied regression (car), functions to test assumptions
+library(olsrr) #Cook's Distance test
+library(broom) #allows us to get model fit statistics
+library(lmtest)
+library(clubSandwich)
+library(DescTools)
+library(ltm)
+library(huxtable) #package to create LaTeX and HTML tables
+library(gtsummary)
+library(ggpubr)
+library(broom)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
+
+
+set.seed(42)
+# define the markup language we are working in.
+# options(qwraps2_markup = "latex") is also supported.
+options(qwraps2_markup = "markdown")
+
+#remove scientific notation
+options(scipen=999)
+
+```
+
+
+```{r read WB data, message=FALSE, warning=FALSE, echo=FALSE,results=FALSE}
+## READ IN WORLD BANK DATA
+
+forest.percent <- wb_data(indicator = "AG.LND.FRST.ZS")  #AG.LND.FRST.ZS 
+forest.area <- wb_data(indicator = "AG.LND.FRST.K2") #AG.LND.FRST.K2
+ag.percent <- wb_data(indicator = "AG.LND.AGRI.ZS") #ag.percent.code
+pop.growth <- wb_data(indicator = "SP.POP.GROW") #SP.POP.GROW
+GDPpc <- wb_data(indicator = "NY.GDP.PCAP.CD") #NY.GDP.PCAP.CD
+```
+
+
+
+```{r clean control variable data, message=FALSE, warning=FALSE, echo=FALSE,results=FALSE}
+### Clean columns
+forest.percent2 <- dplyr::select(forest.percent, -1, -2, -6, -7, -8, -9) 
+head(forest.percent2)
+
+forest.area2 <- dplyr::select(forest.area, -1, -2, -6, -7, -8, -9)
+head(forest.area2)
+
+ag.percent2 <- dplyr::select(ag.percent, -1, -2, -6, -7, -8, -9)
+head(ag.percent2)
+
+pop.growth2 <- dplyr::select(pop.growth, -1, -2, -6, -7, -8, -9)
+head(pop.growth2)
+
+GDPpc2 <- dplyr::select(GDPpc, -1, -2, -6, -7, -8, -9)
+head(GDPpc2)
+
+GDPpc2 <- dplyr::select(GDPpc, -1, -2, -6, -7, -8, -9)
+
+```
+
+
+```{r create ratio of forest area change 2014-2019, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE Ratio of forest area change 2014-2019
+
+#ratio of change in forest area between 2014 and 2019, compared to the forest area in 2014
+
+#FOREST AREA pivot wider
+forest_area_wide <- forest.area2 %>% 
+  select(country,date,AG.LND.FRST.K2,) %>%
+  pivot_wider(names_from=date, values_from=AG.LND.FRST.K2)
+
+  
+#FOREST AREA subset 2014 and 2019
+forest_area_2014_2019 <- forest_area_wide[, c("country", "2014", "2019")]
+
+
+#FOREST AREA CHANGE FROM 2014 and 2019 compared to forest area in 2014
+forest_area_2014_2019$forest_area_change_2014_2019 <- (forest_area_2014_2019$`2019` - forest_area_2014_2019$`2014`) / forest_area_2014_2019$`2014`
+
+#drop 2014 and 2019 columns
+forest_area_2014_2019 <- forest_area_2014_2019 %>% select(country, forest_area_change_2014_2019)
+forest_area_2014_2019
+```
+
+
+```{r create forest percent 2014, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE Forest/land ratio (forest percent) 2014
+#Forest/land ratio (forest percent) - 2014 - worldbank.org
+#FOREST AREA pivot wider
+forest_percent_wide <- forest.percent2 %>% pivot_wider(names_from=date, values_from=AG.LND.FRST.ZS)
+
+  
+#FOREST AREA subset 2020 and 2015
+forest_percent_2014 <- forest_percent_wide[, c("country", "2014")]
+names(forest_percent_2014) <- c("country", "forest_percent_2014")
+forest_percent_2014
+```
+
+
+
+```{r create population growth 2009-2014 & 2014-2019, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE Population growth (percent change in total population from 2009-2014 & 2014-2019)
+
+#pivot wider
+pop_growth_wide <- pop.growth2 %>% pivot_wider(names_from=date, values_from=SP.POP.GROW)
+
+
+#select dates
+pop_growth_2009_2014_2019 <- pop_growth_wide[, c("country", "2009","2014", "2019")]
+
+#change from 2009 to 2014
+pop_growth_2009_2014_2019$pop_growth_2009_2014 <- (pop_growth_2009_2014_2019$`2014` - pop_growth_2009_2014_2019$`2009`)/ pop_growth_2009_2014_2019$`2009`
+
+
+#change from 20014 to 2019
+pop_growth_2009_2014_2019$pop_growth_2014_2019 <- (pop_growth_2009_2014_2019$`2019` - pop_growth_2009_2014_2019$`2014`) / pop_growth_2009_2014_2019$`2014`
+
+#drop misc year columns
+pop_growth_2009_2014_2019 <- pop_growth_2009_2014_2019  %>%  select(country, pop_growth_2009_2014, pop_growth_2014_2019)
+pop_growth_2009_2014_2019
+
+```
+
+ 
+
+```{r create ag land change 2014-2019, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE Agricultural land (percent change in % ag land from 2014-2019)
+
+#pivot wider
+ag_percent_wide <- ag.percent2 %>% pivot_wider(names_from=date, values_from=AG.LND.AGRI.ZS)
+
+#AG PERCENT DOESNT HAVE DATA FOR 2019
+#select dates
+ag_2013_2018 <- ag_percent_wide[, c("country","2013", "2018")]
+
+#2013 to 2018
+ag_2013_2018$ag_change_2013_2018 <- (ag_2013_2018$`2018` - ag_2013_2018$`2013`)/ ag_2013_2018$`2013`
+
+
+#drop unnecessary data
+ag_2013_2018 <- ag_2013_2018  %>%  select(country, ag_change_2013_2018)
+ag_2013_2018
+
+```
+
+
+
+```{r create GDPpc 2009-2014 & 2014-2019, results=FALSE, echo=FALSE, message=FALSE}
+
+### GENERATE Growth in GDP per capita (percent change in GDP from 2014-2019)
+
+#pivot wider
+GDPpc2_wide <- GDPpc2 %>% pivot_wider(names_from=date, values_from=NY.GDP.PCAP.CD)
+
+
+#select dates
+GDPpc_2009_2014_2019 <- GDPpc2_wide[, c("country", "2009","2014", "2019")]
+
+#change from 2009 to 2014
+GDPpc_2009_2014_2019$GDPpc_growth_2009_2014 <- (GDPpc_2009_2014_2019$`2014` - GDPpc_2009_2014_2019$`2009`)/ GDPpc_2009_2014_2019$`2009`
+
+
+#change from 20014 to 2019
+GDPpc_2009_2014_2019$GDPpc_growth_2014_2019 <- (GDPpc_2009_2014_2019$`2019` - GDPpc_2009_2014_2019$`2014`) / GDPpc_2009_2014_2019$`2014`
+
+#drop misc year columns
+GDPpc_2009_2014_2019 <- GDPpc_2009_2014_2019  %>%  select(country, GDPpc_growth_2009_2014, GDPpc_growth_2014_2019)
+GDPpc_2009_2014_2019
+
+```
+
+--------------------------------------------------------
+
+
+
+```{r read in democracy data, results=FALSE, echo=FALSE, results=FALSE, echo=FALSE, message=FALSE}
+## READ IN DEMOCRACY DATA
+direct.democracy <- read.csv("https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv")
+
+
+#41944 - impartial administration
+impartial.administration <-direct.democracy %>% 
+    filter(Indicator.Id==41944)
+
+
+#41983 - mean years of schooling
+years.schooling <-direct.democracy %>% 
+    filter(Indicator.Id==41983)
+
+
+```
+
+
+```{r generate mean years schooling 2014, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE MEAN YEARS SCHOOLING 2014
+#mean years of schooling - 2014
+years_schooling_2014 <-years.schooling %>%
+  select(c(Country.Name, X2014)) %>%
+  rename(country = Country.Name) %>%
+  rename(years_schooling_2014 = X2014)
+
+years_schooling_2014
+```
+
+
+```{r generate impartial administration 2014, results=FALSE, echo=FALSE, message=FALSE}
+### GENERATE IMPARTIAL ADMINISTRATION 2014
+#impartial administration - 2014
+impartial_admin_2014 <- impartial.administration %>%
+  select(c(Country.Name, X2014)) %>%
+  rename(country = Country.Name) %>%
+  rename(impartial_admin_2014 = X2014)
+
+impartial_admin_2014
+```
+
+
+```{r create impartial admin change 2009-2014 & 2014-2019, results=FALSE, echo=FALSE, message=FALSE}
+#### GENERATE IMPARTIAL ADMINISTRATION 2009-2014 & 2014-2019
+#get rid of unnecessary data and pivot long and fix year
+
+#impartial administration (attribute)
+impartial_administration_2009_2014_2019 <-impartial.administration %>%
+  dplyr::select(c(Country.Name, X2009, X2014, X2019))
+
+#change from 2009 to 2014
+impartial_administration_2009_2014_2019$impartial_admin_change_2009_2014 <- (impartial_administration_2009_2014_2019$X2014 - impartial_administration_2009_2014_2019$X2009)/ impartial_administration_2009_2014_2019$X2009
+
+
+#change from 2014 to 2019
+impartial_administration_2009_2014_2019$impartial_admin_change_2014_2019 <- (impartial_administration_2009_2014_2019$X2019 - impartial_administration_2009_2014_2019$X2014)/ impartial_administration_2009_2014_2019$X2014
+
+#drop misc year columns
+impartial_administration_2009_2014_2019 <- impartial_administration_2009_2014_2019 %>% select(Country.Name,impartial_admin_change_2009_2014, impartial_admin_change_2014_2019) 
+
+#fix column names
+names(impartial_administration_2009_2014_2019) <- c("country", "impartial_admin_change_2009_2014", "impartial_admin_change_2014_2019")
+
+impartial_administration_2009_2014_2019
+
+```
+
+
+```{r merge data, results=FALSE, echo=FALSE, message=FALSE}
+## MERGE DATASETS
+df <- Reduce(function(x, y) merge(x, y, all=TRUE), list(forest_area_2014_2019, 
+                                                  forest_percent_2014, 
+                                                  pop_growth_2009_2014_2019,
+                                                  ag_2013_2018,
+                                                  GDPpc_2009_2014_2019,
+                                                  years_schooling_2014,
+                                                  impartial_admin_2014,
+                                                  impartial_administration_2009_2014_2019))
+
+
+
+#df <- forest_area_2014_2019 %>%
+#  full_join(forest_percent_2014, by='country') %>%
+#  full_join(pop_growth_2009_2014_2019, by='country') %>%
+#  full_join(ag_2013_2018, by='country') %>%
+#  full_join(GDPpc_2009_2014_2019, by='country') %>%
+ # full_join(impartial_administration_2009_2014_2019, by='country')
+
+
+
+glimpse(df)
+```
+
+
+```{r subset pos and neg deforestation, results=FALSE, message=FALSE, echo=FALSE}
+## SUBSET DATASETS
+
+#positive deforestation (NEGATIVE FOREST AREA CHANGE)
+df_positive_def_rate <- df[df$forest_area_change_2014_2019<0,]
+
+#negative deforestation (POSITIVE FOREST AREA CHANGE)
+df_negative_def_rate <- df[df$forest_area_change_2014_2019>0,]
+
+```
+
+```{r subset tropical countries, results=FALSE, message=FALSE, echo=FALSE}
+#Subsetting tropical countries
+library(data.table)
+tropical_countries <- fread("csvData.csv")
+
+df.tropical <- setDT(df)[country %chin% tropical_countries$country]
+df.tropical
+```
+
+```{r tropical countries deforestation only, results=FALSE, message=FALSE, echo=FALSE}
+#Subsetting deforested tropical countries
+df.tropical.deforestation <- setDT(df_positive_def_rate)[country %chin% tropical_countries$country]
+df.tropical.deforestation
+length(df.tropical.deforestation$country)
+```
+
+## Data Visualization
+
+**Table 1. Summary Statistics of All Countries Data**
+```{r summary table of df, message=FALSE, results=TRUE, echo=FALSE, warning=FALSE}
+
+#select only variables that are being used in the model
+select.df <- df %>%
+  select(!c(impartial_admin_change_2009_2014, impartial_admin_change_2014_2019)) #log_pop_growth_2014_2019
+
+#convert to data frame because its in a strange format because of dyplr
+master.df.long <- melt(data = select.df, id.vars = c("country"))
+
+summary.master.df.long <- master.df.long %>% 
+  group_by(variable)  %>%
+  summarize(
+                    length_value =length(value) - sum(is.na(value)) , #length of value for each variable minus the sum of NA (2)
+                    mean_value=mean(value, na.rm = TRUE), #remove NA
+                    median_value=median(value, na.rm = TRUE), #remove NA
+                    min_value=min(value, na.rm=TRUE), #remove NA
+                    max_value=max(value, na.rm = TRUE), #remove NA
+                    sd_value=sd(value, na.rm = TRUE), #remove NA
+                    skew_value=skewness(value, na.rm = TRUE), #remove NA
+                    )
+
+# report source
+source <- "Data Source: World Bank"
+
+# make gt summary box
+summary.master.df.long %>%
+gt() %>%
+  tab_header(
+    title = md("Summary Statistics"),
+    subtitle = " ") %>% tab_source_note(
+    source_note = source) %>%
+  
+ 
+  fmt_passthrough (columns=c(variable)) %>%
+  fmt_number(columns = c(length_value), decimals = 0) %>%
+  fmt_number(columns = c(mean_value), decimals= 5) %>%
+  fmt_number(columns = c(median_value), decimals = 5) %>%
+  fmt_number(columns = c(min_value), decimals = 5) %>%
+  fmt_number(columns = c(max_value), decimals = 5) %>%
+  fmt_number(columns = c(sd_value), decimals = 5) %>%
+  fmt_number(columns = c(skew_value), decimals = 5) %>%
+
+cols_label(
+    variable="Variable",
+    length_value = "Observations",
+    mean_value = "Mean",
+    median_value = "Median",
+    min_value = "Minimum",
+    max_value = "Maximum",
+    sd_value = "SD",
+    skew_value = "Skewness")
+
+```
+
+**Table 2a. Missingness in All Countries Data**
+```{r evaluate missingness in df, message=FALSE, results=TRUE, echo=FALSE}
+#dataframe of missingness
+
+missing.summary<-df %>% 
+  summarise(sumNA.impartial.admin = sum(is.na(impartial_admin_2014)),
+            sumNA.forest.change = sum(is.na(forest_area_change_2014_2019)),
+            sumNA.forest.percent.2014 = sum(is.na(forest_percent_2014)),
+            sumNA.pop.growth = sum(is.na(pop_growth_2009_2014)),
+            sumNA.ag.change = sum(is.na(ag_change_2013_2018)),
+            sumNA.gdppc.growth = sum(is.na(GDPpc_growth_2009_2014)),
+            sumNA.schooling = sum(is.na(years_schooling_2014))) %>%
+  filter(sumNA.forest.change>0 | sumNA.impartial.admin>0 | sumNA.forest.percent.2014>0 | sumNA.pop.growth>0 | sumNA.ag.change>0 | sumNA.gdppc.growth>0 | sumNA.schooling>0)
+
+missing.summary
+```
+
+
+**Table 2b. Missingness by Country in All Countries Data**
+```{r evaluate missingness by country in df, message=FALSE, results=TRUE, echo=FALSE}
+#dataframe of missingness
+
+missing.by.country<-df %>% 
+  group_by(country) %>% 
+  summarise(sumNA.impartial.admin = sum(is.na(impartial_admin_2014)),
+            sumNA.forest.change = sum(is.na(forest_area_change_2014_2019)),
+            sumNA.forest.percent.2014 = sum(is.na(forest_percent_2014)),
+            sumNA.pop.growth = sum(is.na(pop_growth_2009_2014)),
+            sumNA.ag.change = sum(is.na(ag_change_2013_2018)),
+            sumNA.gdppc.growth = sum(is.na(GDPpc_growth_2009_2014)),
+            sumNA.schooling = sum(is.na(years_schooling_2014))) %>%
+  filter(sumNA.forest.change>0 | sumNA.impartial.admin>0 | sumNA.forest.percent.2014>0 | sumNA.pop.growth>0 | sumNA.ag.change>0 | sumNA.gdppc.growth>0 | sumNA.schooling>0)
+
+missing.by.country
+```
+
+
+
+
+**Table 3. Summary Statistics of Tropical Countries Data**
+```{r summary table of df.tropical, message=FALSE, results=TRUE, echo=FALSE}
+select.df.tropical <- df.tropical %>%
+  select(!c(impartial_admin_change_2009_2014, impartial_admin_change_2014_2019))
+
+tropical.df.long <- melt(data = select.df.tropical, id.vars = c("country"))
+
+summary.tropical.df.long  <- tropical.df.long  %>% 
+  dplyr::group_by(variable)  %>%
+
+  dplyr::summarize(
+                    length_value =length(value) - sum(is.na(value)) , #length of value for each variable minus the sum of NA (2)
+                    mean_value=mean(value, na.rm = TRUE), #remove NA
+                    median_value=median(value, na.rm = TRUE), #remove NA
+                    min_value=min(value, na.rm=TRUE), #remove NA
+                    max_value=max(value, na.rm = TRUE), #remove NA
+                    sd_value=sd(value, na.rm = TRUE), #remove NA
+                    skew_value=skewness(value, na.rm = TRUE), #remove NA
+                    )
+
+# report source
+source <- "Data Source: World Bank"
+
+# make gt summary box
+summary.tropical.df.long %>%
+gt() %>%
+  tab_header(
+    title = md("Summary Statistics"),
+    subtitle = " ") %>% tab_source_note(
+    source_note = source) %>%
+  
+ 
+  fmt_passthrough (columns=c(variable)) %>%
+  fmt_number(columns = c(length_value), decimals = 0) %>%
+  fmt_number(columns = c(mean_value), decimals= 5) %>%
+  fmt_number(columns = c(median_value), decimals = 5) %>%
+  fmt_number(columns = c(min_value), decimals = 5) %>%
+  fmt_number(columns = c(max_value), decimals = 5) %>%
+  fmt_number(columns = c(sd_value), decimals = 5) %>%
+  fmt_number(columns = c(skew_value), decimals = 5) %>%
+
+cols_label(
+    variable="Variable",
+    length_value = "Observations",
+    mean_value = "Mean",
+    median_value = "Median",
+    min_value = "Minimum",
+    max_value = "Maximum",
+    sd_value = "SD",
+    skew_value = "Skewness")
+```
+
+
+
+
+  
+**Table 4. Missingness in Tropical Countries Data**
+```{r evaluate missingness in df.tropical, message=FALSE, results=TRUE, echo=FALSE}
+#dataframe of missingness
+
+missing.summary.tropical<-df.tropical %>% 
+  group_by(country) %>% 
+  summarise(sumNA.impartial.admin = sum(is.na(impartial_admin_2014)),
+            sumNA.forest.change = sum(is.na(forest_area_change_2014_2019)),
+            sumNA.forest.percent.2014 = sum(is.na(forest_percent_2014)),
+            sumNA.pop.growth = sum(is.na(pop_growth_2009_2014)),
+            sumNA.ag.change = sum(is.na(ag_change_2013_2018)),
+            sumNA.gdppc.growth = sum(is.na(GDPpc_growth_2009_2014)),
+            sumNA.schooling = sum(is.na(years_schooling_2014))) %>%
+  filter(sumNA.forest.change>0 | sumNA.impartial.admin>0 | sumNA.forest.percent.2014>0 | sumNA.pop.growth>0 | sumNA.ag.change>0 | sumNA.gdppc.growth>0 | sumNA.schooling>0)
+
+missing.summary.tropical
+```
+
+
+
+
+```{r summary of Pearson correlation coeffecients, message=FALSE, warning=FALSE, results=FALSE, echo=FALSE}
+#make into dataframe
+df = as.data.frame(df)
+df_positive_def_rate = as.data.frame(df_positive_def_rate)
+df_negative_def_rate = as.data.frame(df_negative_def_rate)
+
+cor_all <- cor(df[3:10], df[2],  method = "pearson", use = "pairwise.complete.obs")
+
+cor_pos_def_rate <- cor(df_positive_def_rate[3:10], df_positive_def_rate[2],  method = "pearson", use = "pairwise.complete.obs")
+
+
+cor_neg_def_rate <- cor(df_negative_def_rate[3:10], df_negative_def_rate[2],  method = "pearson", use = "pairwise.complete.obs")
+
+
+cor_summary <- bind_cols(round(as.data.frame(cor_all),3), round(as.data.frame(cor_pos_def_rate),3), round(as.data.frame(cor_neg_def_rate),3))
+
+
+#CHANGE INDEX
+cor_summary_changed <- cbind(newColName = rownames(cor_summary), cor_summary)
+rownames(cor_summary) <- 1:nrow(cor_summary)
+
+cor_summary_changed$newColName <- c("2014", "2009-2014", "2014-2019", "2013-2018", "2009-2014",  "2014-2019", "2014", " 2014")
+
+#RENAME COLUMNS
+
+names(cor_summary_changed) <- (c("Explanatory Variable","All",	"Positive def. rate",	"Negative def. rate"))
+
+cor_summary_changed
+```
+
+
+**Table 5. Pearsons Correlation Coefficients of Explanatory and Response Variables**
+```{r summary table of correlation coefficients, message=FALSE, warning=FALSE, results=TRUE, echo=FALSE}
+
+
+gt_tbl <- gt(cor_summary_changed)
+
+gt_tbl <- 
+  gt_tbl %>%
+  tab_header(
+    title = "Pearson Correlation Coefficients",
+  ) %>% 
+  tab_row_group(
+    label = "Years Schooling",
+    rows = 7
+  ) %>% 
+  tab_row_group(
+    label = "Growth of GDP per capita",
+    rows = 5:6
+  ) %>% 
+  tab_row_group(
+    label = "Expansion of Ag land",
+    rows = 4
+  ) %>% 
+  tab_row_group(
+    label = "Population Growth",
+    rows = 2:3
+  ) %>% 
+  tab_row_group(
+    label = "Forest Percent",
+    rows = 1
+  ) %>% 
+  tab_row_group(
+    label = "Impartial Administration",
+    rows = 8
+  ) 
+  
+
+# Show the gt table
+gt_tbl 
+```
+
+
+
+
+```{r  scatterplot matrix df, message=FALSE, results=FALSE, echo=FALSE, fig.height=10, fig.width=10}
+#glimpse(df)
+pairs.panels(df[,c(3,4,6,7,9,10,2)], #response variable in last column
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             pch=".",
+             density = TRUE,  # show density plots
+             ellipses = FALSE)# show correlation ellipses
+```
+**Figure 1. Scatterplot Matrix of All Countries Data**
+
+
+```{r scatterplot matrix df.tropical, message=FALSE, results=FALSE, echo=FALSE, fig.height=10, fig.width=10}
+#glimpse(df.tropical.deforestation)
+pairs.panels(df.tropical[,c(3,4,6,7,9,10,2)], #response variable in last column
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             pch=".",
+             density = TRUE,  # show density plots
+             ellipses = FALSE)# show correlation ellipses
+```
+
+
+**Figure 2. Scatterplot Matrix of Tropical Countries Data**
+
+
+
+## MODELS
+
+### Model 1 - All Countries
+```{r model ALL data, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+model.all <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2014_2019 + ag_change_2013_2018 + GDPpc_growth_2009_2014 + years_schooling_2014, data=df) 
+tbl_regression(model.all, estimate_fun = function(x) style_ratio(x, digits = 5))   %>%
+  modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+
+**Results 1a. All Countries Model**
+
+
+
+```{r model.ALL Residuals vs. leverage, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Checking for outliers
+plot(model.all, 5) #threshold is 0.5
+
+```
+
+**Figure 3. Residuals vs. leverage plot for All Countries Model**
+
+
+```{r model.ALL residuals vs fitted, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Testing for linearity - Residuals vs. Fitted plot
+plot(model.all, 1)
+```
+ 
+
+**Figure 4. Residuals vs. fitted plot for All Countries Model**
+
+
+```{r model.ALL Breusch-Pagan test, warning=FALSE, message=FALSE, echo=FALSE, results = FALSE}
+#Testing for homoskedasticity
+lmtest.all <-lmtest::bptest(model.all)
+lmtest.all
+```
+
+
+```{r model.ALL robust SE, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Using robust standard errors
+tbl_regression(coeftest(model.all, vcov=vcovHC(model.all)), estimate_fun = function(x) style_ratio(x, digits = 5)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+
+
+**Results 1b. All Countries Model, using robust standard errors**
+
+
+```{r for Fig. 15 model.all.robust, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+model.all.robust <- coeftest(model.all, vcov=vcovHC(model.all))
+
+model.all.robust
+```
+
+
+```{r model.ALL VIF, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Testing for multicollinearity
+VIF.all <- vif(model.all)
+
+#reindex output
+VIF_changed <- cbind(newColName = rownames(as.data.frame(VIF.all)), as.data.frame(VIF.all))
+rownames(VIF_changed) <- 1:nrow(VIF_changed)
+#change column names
+names(VIF_changed) <- c("Variable", "VIF")
+
+gt_tbl <- gt(VIF_changed) %>%
+  tab_header(
+    title = "All Countries Model VIF Scores",
+  )
+
+gt_tbl  
+```
+**Figure 5. All Countries VIF scores**
+
+### MODEL 2 - Deforested Countries
+```{r model.ALL deforestation only, echo= FALSE}
+
+model.all.deforestation <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2009_2014 + ag_change_2013_2018 + GDPpc_growth_2009_2014 + years_schooling_2014, data=df_positive_def_rate) 
+tbl_regression(model.all.deforestation, estimate_fun = function(x) style_ratio(x, digits = 4)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 2a. Deforested Countries Model**
+
+```{r model.ALL deforestation only residuals vs fitted, echo= FALSE}
+#Testing for outliers
+plot(model.all.deforestation, 5) #threshold is 0.5
+
+```
+
+**Figure 6. Residuals vs. leverage plot for Deforested Countries Model**
+
+
+```{r model.ALL deforestation model without outliers, echo= FALSE}
+#Testing for outliers
+df_positive_def_rate_noOutliers <- df_positive_def_rate[-48,]
+
+model.all.deforestation2 <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2009_2014 + ag_change_2013_2018 + GDPpc_growth_2009_2014 + years_schooling_2014, data=df_positive_def_rate_noOutliers) 
+tbl_regression(model.all.deforestation2, estimate_fun = function(x) style_ratio(x, digits = 4)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 2b. Deforested Countries Model with no outliers**
+
+
+```{r model.ALL deforestation no outlier plot, echo= FALSE}
+#Testing for linearity - Residuals vs. Fitted plot
+plot(model.all.deforestation2, 1)
+```
+
+
+**Figure 7. Residuals vs. fitted plot for Deforested Countries Model**
+
+
+
+```{r model.ALL deforestation no outlier VIF, echo= FALSE}
+VIF.deforested <- vif(model.all.deforestation2)
+
+#reindex output
+VIF_changed <- cbind(newColName = rownames(as.data.frame(VIF.deforested)), as.data.frame(VIF.deforested))
+rownames(VIF_changed) <- 1:nrow(VIF_changed)
+#change column names
+names(VIF_changed) <- c("Variable", "VIF")
+
+gt_tbl <- gt(VIF_changed) %>%
+  tab_header(
+    title = "Deforested Countries Model VIF Scores",
+  )
+
+gt_tbl  
+```
+**Figure 8. Deforested Countries VIF scores**
+
+
+
+```{r model.ALL deforestation no outlier Breusch-Pagan test, echo= FALSE, results=FALSE}
+#Testing for homoskedasticity
+lmtest::bptest(model.all.deforestation2)
+```
+
+```{r robust SE model.ALL deforestation no outlier, echo= FALSE, warning=FALSE, message=FALSE}
+tbl_regression(coeftest(model.all.deforestation2, vcov = vcovHC(model.all.deforestation2, type="HC1")), estimate_fun = function(x) style_ratio(x, digits = 4)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 2c. Deforested Countries Model with no outliers and adjusted for robust standard errors**
+
+```{r for Fig. 15 model.all.deforestation2.robust, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+model.all.deforestation2.robust <- coeftest(model.all.deforestation2, vcov = vcovHC(model.all.deforestation2, type="HC1"))
+
+model.all.deforestation2.robust
+```
+
+
+
+### MODEL 3 - Tropical Countries
+
+```{r model.tropical, echo=FALSE}
+model.tropical <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2014_2019 + GDPpc_growth_2009_2014 + ag_change_2013_2018 + years_schooling_2014, data=df.tropical) 
+
+tbl_regression(model.tropical, estimate_fun = function(x) style_ratio(x, digits = 5)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 3a. Tropical Countries Model**
+
+```{r model.tropical outliers , echo=FALSE}
+plot(model.tropical, 5) #threshold is 0.5
+
+```
+  
+**Figure 9. Residuals vs. leverage plot for Tropical Countries Model**
+
+```{r model.tropical deforestation model without outliers, echo= FALSE}
+#Testing for outliers
+df.tropical.noOutliers <- df_positive_def_rate[-15,]
+
+model.tropical.no.outliers <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2014_2019 + GDPpc_growth_2009_2014 + ag_change_2013_2018 + years_schooling_2014, data=df.tropical.noOutliers) 
+tbl_regression(model.tropical.no.outliers, estimate_fun = function(x) style_ratio(x, digits = 5)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 3b. Tropical Countries Model with no outliers**
+
+
+```{r model.tropical residuals vs fitted, echo=FALSE}
+#Testing for linearity - Residuals vs. Fitted plot
+plot(model.tropical, 1)
+```
+  
+**Figure 10. Residuals vs. fitted plot for Tropical Countries Model**
+
+```{r model.tropical VIF, echo=FALSE}
+VIF.tropical <- vif(model.tropical.no.outliers)
+
+#reindex output
+VIF_changed <- cbind(newColName = rownames(as.data.frame(VIF.tropical)), as.data.frame(VIF.tropical))
+rownames(VIF_changed) <- 1:nrow(VIF_changed)
+#change column names
+names(VIF_changed) <- c("Variable", "VIF")
+
+gt_tbl <- gt(VIF_changed) %>%
+  tab_header(
+    title = "Tropical Countries Model VIF Scores",
+  )
+
+gt_tbl 
+```
+**Figure 11. Tropical Countries Model VIF Scores**
+
+```{r model.tropical Breusch-Pagan test, echo=FALSE, results = FALSE}
+#Testing for homoskedasticity
+lmtest::bptest(model.tropical.no.outliers)
+```
+
+```{r robust SE model.tropical deforestation no outlier, echo= FALSE, warning=FALSE, message=FALSE}
+#<0.1
+tbl_regression(coeftest(model.tropical.no.outliers, vcov = vcovHC(model.tropical.no.outliers, type="HC1")), estimate_fun = function(x) style_ratio(x, digits = 5)) %>%
+   modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 3c. Deforested Countries Model with no outliers and adjusted for robust standard errors**
+
+```{r for Fig. 15 model.tropical.no.outliers.robust, echo=FALSE, warning=FALSE, message=FALSE, results=FALSE}
+model.tropical.no.outliers.robust <- (coeftest(model.tropical.no.outliers, vcov = vcovHC(model.tropical.no.outliers, type="HC1")))
+
+model.tropical.no.outliers.robust
+```
+
+
+### MODEL 4 - Deforested Tropical Countries
+```{r model.tropical.deforestation, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+model.tropical.deforestation <-lm(forest_area_change_2014_2019 ~ impartial_admin_2014 + forest_percent_2014 + pop_growth_2009_2014 + GDPpc_growth_2009_2014 + ag_change_2013_2018 + years_schooling_2014, data=df.tropical.deforestation) 
+tbl_regression(model.tropical.deforestation, estimate_fun = function(x) style_ratio(x, digits = 5)) %>%
+  modify_column_unhide(column = std.error) %>% as_hux_table()
+```
+**Results 4a. Deforested Tropical Countries Model**
+
+
+
+
+```{r model.tropical.deforestation residuals vs. leverage , warning=FALSE,  message=FALSE, echo=FALSE, results = TRUE}
+#Checking for outliers
+plot(model.tropical.deforestation, 5)
+
+```
+  
+**Figure 12. Residuals vs. leverage plot for Deforested Tropical Countries Model**
+
+
+```{r model.tropical.deforestation residuals vs fitted, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Testing for linearity - fesiduals vs. Fitted plot
+plot(model.tropical.deforestation, 1)
+```
+
+**Figure 13. Residuals vs. fitted plot for Deforested Tropical Countries Model**
+
+
+```{r model.tropical.deforestation Breusch-Pagan test, warning=FALSE, message=FALSE, echo=FALSE, results = FALSE}
+#Testing for homoskedasticity
+lmtest::bptest(model.tropical.deforestation)
+```
+
+
+```{r model.tropical.deforestation VIF, warning=FALSE, message=FALSE, echo=FALSE, results = TRUE}
+#Testing for multicollinearity
+VIF.tropical.deforested <- vif(model.tropical.deforestation)
+
+#reindex output
+VIF_changed <- cbind(newColName = rownames(as.data.frame(VIF.tropical.deforested)), as.data.frame(VIF.tropical.deforested))
+rownames(VIF_changed) <- 1:nrow(VIF_changed)
+#change column names
+names(VIF_changed) <- c("Variable", "VIF")
+
+gt_tbl <- gt(VIF_changed) %>%
+  tab_header(
+    title = "Deforested Tropical Countries Model VIF Scores",
+  )
+
+gt_tbl 
+```
+
+**Figure 14. Deforested Tropical Countries Model VIF Scores**
+
+
+```{r all models, results=TRUE, echo=FALSE}
+all.models.output<- tab_model(model.all, model.all.deforestation2, model.tropical.no.outliers, model.tropical.deforestation, title = "OLS model for 1) All Countries 2) All Deforested Countries 3) Tropical Countries 4) Deforested Tropical Countries", show.se = TRUE, robust = TRUE, digits = 5)
+
+
+all.models.output
+
+```
+
+**Figure 15. All models**
+
+
+
